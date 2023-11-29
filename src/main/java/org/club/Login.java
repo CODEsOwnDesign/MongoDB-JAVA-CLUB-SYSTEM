@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class Login extends JFrame {
     public Login() {
+        super();
         Constant.setLookAndFeel(this);
         Constant.setFrameIcon(this);
         SwingUtilities.invokeLater(this::initializeLoginUI);
@@ -45,6 +46,7 @@ public class Login extends JFrame {
         pLoginImage.setOpaque(false); // Make the panel transparent
 
         lblLoginImage = new JLabel();
+        lblLoginImage.setLabelFor(pLoginImage);
         lblLoginImage.setIcon(Constant.resizeIcon(ResourceLoader.loginImage, 170, 170));
 
         pLoginImage.add(lblLoginImage);
@@ -60,6 +62,7 @@ public class Login extends JFrame {
         lblUsername.setIcon(Constant.resizeIcon(ResourceLoader.userIcon, 60, 60));
         txtUsername = new JTextField();
         txtUsername.setBounds(75, 30, 400, 60);
+        lblUsername.setLabelFor(txtUsername);
 
         lblPassword = new JLabel();
         lblPassword.setBounds(10, 70, 120, 120);
@@ -67,6 +70,7 @@ public class Login extends JFrame {
         txtPassword = new JPasswordField();
         txtPassword.setBounds(75, 100, 400, 60);
         txtPassword.setEchoChar('*');
+        lblPassword.setLabelFor(txtPassword);
 
         pMain.add(lblUsername);
         pMain.add(txtUsername);
