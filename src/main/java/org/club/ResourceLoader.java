@@ -5,8 +5,17 @@ import java.awt.*;
 
 /**
  * A utility class for loading resources such as images for the sports club application.
+ * <p>
+ * This class provides static constants representing various images used in the sports club application.
+ * These images include the background image, login screen image, user icon, password icon, show and hide
+ * icons for password visibility, and icons for forgotten passwords.
+ * The paths to these images are specified
+ * as constants and loaded as resources within the application.
+ * <p>
+ * The purpose of this utility class is to centralize the loading of resources, ensuring consistent access
+ * to images across different parts of the application.
  */
-public class ResourceLoader {
+class ResourceLoader {
     /**
      * The background image for the application.
      */
@@ -41,11 +50,4 @@ public class ResourceLoader {
      * The icon representing a forgotten password.
      */
     public static ImageIcon forgotIcon = new ImageIcon("src/main/resources/images/forgot.png");
-
-    /**
-     * Default constructor for the ResourceLoader class.
-     */
-    public ResourceLoader() {
-        // No initialization required in the constructor
-    }
 }

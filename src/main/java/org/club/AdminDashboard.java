@@ -8,9 +8,13 @@ import java.awt.*;
  * It extends JFrame to create the graphical user interface.
  */
 public class AdminDashboard extends JFrame {
+    SetBackgroundImage adminDashboardBackground;
     JPanel mainDashboard;
     JMenuBar menuBar;
-    JMenu fileMenu, membersMenu, groupMenu, sportsMenu, storeMenu, transactionsMenu, eventsMenu, scheduleMenu, reportsMenu, helpMenu, profileMenu;
+    JMenu userMenu, membershipMenu, gameMenu, fileMenu, membersMenu, groupMenu, sportsMenu, storeMenu, transactionsMenu, eventsMenu, scheduleMenu, reportsMenu, helpMenu, profileMenu;
+    JMenuItem createUserItem, editUserItem, deactivateUserItem;
+    JMenuItem approveMembershipItem, renewMembershipItem, manageFeesItem;
+    JMenuItem addGameItem, editGameItem, removeGameItem;
 
     /**
      * Instantiates a new Admin dashboard.
@@ -18,25 +22,28 @@ public class AdminDashboard extends JFrame {
      * It sets the look and feel, sets the frame icon, and initializes the dashboard.
      */
     public AdminDashboard() {
-        // Set look and feel and frame icon
+        // Set the look and feel to provide a consistent appearance
         Constant.setLookAndFeel(this);
+        // Set the frame icon to a specific image or icon
         Constant.setFrameIcon(this);
-
-        // Initialize the admin dashboard
-        SwingUtilities.invokeLater(this::initializeAdminDashboard);
+        // Asynchronously invoke the methods to initialize and add UI components
+        SwingUtilities.invokeLater(this::initializeAdminDashboardComponents);
+        SwingUtilities.invokeLater(this::addComponentsToFrame);
+        // Pack the frame to adjust its size based on component preferences
+        pack();
     }
 
     /**
      * Initializes the admin dashboard.
      * Private method to set up the graphical components of the admin dashboard.
      */
-    private void initializeAdminDashboard() {
+    private void initializeAdminDashboardComponents() {
         /* Set up the login frame */
         // Set up JFrame with specified title and size
         Constant.setUpJFrame(this, "Admin Dashboard", 1900, 1000);
         /* Set the background,  */
         // Create a background image panel and add it to the content pane
-        SetBackgroundImage adminDashboardBackground = new SetBackgroundImage();
+        adminDashboardBackground = new SetBackgroundImage();
         this.getContentPane().add(adminDashboardBackground);
 
         mainDashboard = new JPanel();
@@ -55,46 +62,43 @@ public class AdminDashboard extends JFrame {
                 g.fillRect(0, 0, getWidth(), getHeight());
             }
         };
-        menuBar.setPreferredSize(new Dimension((width - 100), 50));
+        menuBar.setPreferredSize(new Dimension((width - 100), 30));
         // User Management Menu
-        JMenu userMenu = new JMenu("User Management");
-        JMenuItem createUserItem = new JMenuItem("Create User");
-        JMenuItem editUserItem = new JMenuItem("Edit User");
-        JMenuItem deactivateUserItem = new JMenuItem("Deactivate User");
+        userMenu = new JMenu("User Management");
+        createUserItem = new JMenuItem("Create User");
+        editUserItem = new JMenuItem("Edit User");
+        deactivateUserItem = new JMenuItem("Deactivate User");
 
+        // Membership Management Menu
+        membershipMenu = new JMenu("Membership Management");
+        approveMembershipItem = new JMenuItem("Approve Membership");
+        renewMembershipItem = new JMenuItem("Renew Membership");
+        manageFeesItem = new JMenuItem("Manage Fees");
+
+
+        // Game Management Menu
+        gameMenu = new JMenu("Game Management");
+        addGameItem = new JMenuItem("Add Game");
+        editGameItem = new JMenuItem("Edit Game");
+        removeGameItem = new JMenuItem("Remove Game");
+    }
+
+    private void addComponentsToFrame() {
         userMenu.add(createUserItem);
         userMenu.add(editUserItem);
         userMenu.add(deactivateUserItem);
-
-        // Membership Management Menu
-        JMenu membershipMenu = new JMenu("Membership Management");
-        JMenuItem approveMembershipItem = new JMenuItem("Approve Membership");
-        JMenuItem renewMembershipItem = new JMenuItem("Renew Membership");
-        JMenuItem manageFeesItem = new JMenuItem("Manage Fees");
 
         membershipMenu.add(approveMembershipItem);
         membershipMenu.add(renewMembershipItem);
         membershipMenu.add(manageFeesItem);
 
-        // Game Management Menu
-        JMenu gameMenu = new JMenu("Game Management");
-        JMenuItem addGameItem = new JMenuItem("Add Game");
-        JMenuItem editGameItem = new JMenuItem("Edit Game");
-        JMenuItem removeGameItem = new JMenuItem("Remove Game");
-
         gameMenu.add(addGameItem);
         gameMenu.add(editGameItem);
         gameMenu.add(removeGameItem);
 
-        // ... Add more menus and menu items for other functionalities ...
-
-        // Add menus to the menu bar
         menuBar.add(userMenu);
         menuBar.add(membershipMenu);
         menuBar.add(gameMenu);
-
-        // Set the menu bar to the frame
-//        setJMenuBar(menuBar);
 
         adminDashboardBackground.add(menuBar, BorderLayout.NORTH);
         adminDashboardBackground.add(mainDashboard, BorderLayout.SOUTH);
